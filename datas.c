@@ -1,8 +1,3 @@
-/*Codigo gerado pelo ChatGPT
-Este programa permite ao usuário inserir duas datas no formato DD MM AAAA (dia, mês e ano) e, em seguida, calcula a diferença em dias
- entre essas duas datas. Certifique-se de inserir as datas no formato correto e observe que este programa não trata todos os casos
-  possíveis (por exemplo, datas inválidas), mas deve funcionar bem para datas válidas.*/
-  
 #include <stdio.h>
 
 // Estrutura para representar uma data
