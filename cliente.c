@@ -7,7 +7,7 @@ Cliente* criaClienteLista(void){
 }
 
 void leDadosCliente(Cliente* novo){
-    printf("Digite a cnh do Cliente: \n");
+    printf("Digite a CNH do Cliente: \n");
     scanf(" %d", &novo->cnh);
     getchar();
     printf("Digite o nome do Cliente: \n");
@@ -27,8 +27,10 @@ Cliente* incluiCliente(Cliente* cliente)
 
 void imprimeCliente(Cliente* cliente){
     Cliente* p;
+    int i = 0;
 
     for(p = cliente; p != NULL; p = p->prox){
-        printf(" cnh: %d || nome: %s || telefone: %d \n", p->cnh, p->nome, p->telefone);
+        i++;
+        printf("\nCliente %d: \nNome: %sCNH: %d\nTelefone: %d\n", i, p->nome, p->cnh, p->telefone);
     }
 }

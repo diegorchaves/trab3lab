@@ -23,19 +23,22 @@ Cliente* procuraCliente(char nome[30], Cliente* clienteLista){
 }
 
 void leDadosLocacao(Locacao* novo, Cliente* clienteLista, Veiculo* veiculoLista){
-    char nomeLocal[30];
+    // char nomeLocal[30];
 
-    do{
-        printf("Digite o nome do cliente: ");
-        fgets(nomeLocal, sizeof(nomeLocal), stdin);
-        novo->cliente = procuraCliente(nomeLocal, clienteLista);
-    }while(novo->cliente == NULL);
-    
-    printf("Digite a data da locacao: ");
-    scanf(" %d %d %d", &novo->retirada->day, &novo->retirada->month, &novo->retirada->year);
+    // do{
+    //     getchar();
+    //     printf("Digite o nome do cliente: ");
+    //     fgets(nomeLocal, sizeof(nomeLocal), stdin);
+    //     novo->cliente = procuraCliente(nomeLocal, clienteLista);
+    // }while(novo->cliente == NULL);
 
-    printf("Digite a data da devolucao: ");
-    scanf(" %d %d %d", &novo->devolucao->day, &novo->devolucao->month, &novo->devolucao->year);
+
+    ///ERRO AQUI 
+    printf("Digite a data da locacao (DD MM AAAA): ");
+    scanf("%d %d %d", &novo->retirada->day, &novo->retirada->month, &novo->retirada->year);
+
+    printf("Digite a data da devolucao (DD MM AAAA): ");
+    scanf("%d %d %d", &novo->devolucao->day, &novo->devolucao->month, &novo->devolucao->year);
 
     //imprimeVeiculoDisponiveis(veiculosLista, novo->retirada, novo->devolucao);
 
