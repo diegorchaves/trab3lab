@@ -14,8 +14,12 @@ typedef struct locacao Locacao;
 
 Locacao *criaLocacaoLista(void);
 
-Cliente *procuraCliente(char nome[30], Cliente *clienteLista);
+int estaLocado(Veiculo* veiculo, Locacao* listaLocacao, struct Date *retirada, struct Date *devolucao);
 
-void leDadosLocacao(Locacao *novo, Cliente *clienteLista, Veiculo *veiculoLista);
+int calculaValorPago(Veiculo* veiculo, struct Date *retirada, struct Date *devolucao);
+
+void leDadosLocacao(Locacao* locacao, Locacao *novo, Cliente *clienteLista, Veiculo *veiculoLista);
 
 Locacao *incluiLocacao(Locacao *locacao, Cliente *clienteLista, Veiculo *veiculoLista);
+
+void imprimeLocacoes(Locacao* locacao);

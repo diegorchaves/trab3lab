@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "cliente.h"
 
 Cliente* criaClienteLista(void){
@@ -33,4 +34,19 @@ void imprimeCliente(Cliente* cliente){
         i++;
         printf("\nCliente %d: \nNome: %sCNH: %d\nTelefone: %d\n", i, p->nome, p->cnh, p->telefone);
     }
+}
+
+Cliente *procuraCliente(char nome[30], Cliente *clienteLista)
+{
+    Cliente *p;
+
+    for (p = clienteLista; p != NULL; p = p->prox)
+    {
+        if (strcmp(nome, p->nome) == 0)
+        {
+            return p;
+        }
+    }
+
+    return NULL;
 }

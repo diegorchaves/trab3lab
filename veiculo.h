@@ -3,7 +3,7 @@
 
 struct veiculo{
     int id;
-    char placa[8];
+    char placa[9];
     char marca[15];
     char modelo[20];
     int anoFabricacao;
@@ -22,4 +22,4 @@ Veiculo* incluiVeiculo(Veiculo* veiculo);
 
 void imprimeVeiculoTodos(Veiculo* veiculo);
 
-// void imprimeVeiculoDisponiveis(Veiculo* veiculo, Date retirada, Date devolucao);
+Veiculo *procuraVeiculo(char placa[9], Veiculo *veiculoLista);

@@ -16,3 +16,5 @@ void leDadosCliente(Cliente* novo);
 Cliente* incluiCliente(Cliente* cliente);
 
 void imprimeCliente(Cliente* cliente);
+
+Cliente *procuraCliente(char nome[30], Cliente *clienteLista);

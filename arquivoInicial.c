@@ -17,11 +17,12 @@ int main()
     locacao1 = criaLocacaoLista();
 
     cliente1 = incluiCliente(cliente1);
-    // veiculo1 = incluiVeiculo(veiculo1);
+    veiculo1 = incluiVeiculo(veiculo1);
     locacao1 = incluiLocacao(locacao1, cliente1, veiculo1);
 
-    imprimeCliente(cliente1);
-    imprimeVeiculoTodos(veiculo1);
-
+    //imprimeCliente(cliente1);
+    // imprimeVeiculoTodos(veiculo1);
+    imprimeLocacoes(locacao1);
+    
     return 0;
 }
