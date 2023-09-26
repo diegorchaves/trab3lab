@@ -40,7 +40,7 @@ void leDadosLocacao(Locacao* listaLocacao, Locacao *novo, Cliente *clienteLista,
 
     // PEGA NOME DO CLIENTE
     char nomeLocal[30];
-    char placaLocal[9];
+    char placaLocal[8];
     getchar();
     do
     {

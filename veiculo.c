@@ -11,11 +11,11 @@ Veiculo* criaVeiculoLista(void){
 
 void leDadosVeiculo(Veiculo* novo){
     printf("Digite a marca do veiculo: \n");
-    scanf(" %s", novo->marca);
+    scanf("%s", novo->marca);
     printf("Digite a modelo do veiculo: \n");
     scanf(" %s", novo->modelo);
     printf("Digite a placa do veiculo: \n");
-    scanf(" %s", novo->placa);
+    scanf("%s", novo->placa);
     // printf("Digite a ano de Fabricacao do veiculo: \n");
     // scanf(" %d", &novo->anoFabricacao);
     // printf("Digite a kilometragem do veiculo: \n");
@@ -44,7 +44,7 @@ void imprimeVeiculoTodos(Veiculo* veiculo){
     }
 }
 
-Veiculo *procuraVeiculo(char placa[9], Veiculo *veiculoLista)
+Veiculo *procuraVeiculo(char placa[8], Veiculo *veiculoLista)
 {
     Veiculo *p;
 
