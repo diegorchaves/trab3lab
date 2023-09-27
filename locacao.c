@@ -13,6 +13,7 @@ Veiculo *realizaLocacao (char *placaLocal, Veiculo *listaVeiculos)
     {
         if (p->disponivel == 1 && strcmp (placaLocal, p->placa) == 0)
         {
+            p->disponivel = 0;
             return p;
         }
     }
