@@ -22,4 +22,6 @@ Veiculo* incluiVeiculo(Veiculo* veiculo);
 
 void imprimeVeiculoTodos(Veiculo* veiculo);
 
+void imprimeVeiculoDisponiveis(Veiculo* veiculo);
+
 Veiculo *procuraVeiculo(char placa[8], Veiculo *veiculoLista);

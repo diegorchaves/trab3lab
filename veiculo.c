@@ -44,13 +44,23 @@ void imprimeVeiculoTodos(Veiculo* veiculo){
     }
 }
 
+void imprimeVeiculoDisponiveis(Veiculo* veiculoLista){
+    Veiculo* p;
+
+    for(p = veiculoLista; p != NULL; p = p->prox){
+        if(p->disponivel == 1){ //VERIFICA SE N ESTA LOCADO
+            printf("Veiculo Diponivel: %s , PLACA: %s \n", p->modelo, p->placa);
+        }
+    }
+}
+
 Veiculo *procuraVeiculo(char placa[8], Veiculo *veiculoLista)
 {
     Veiculo *p;
 
     for (p = veiculoLista; p != NULL; p = p->prox)
     {
-        if (strcmp(placa, p->placa) == 0)
+        if (strcmp(placa, p->placa) == 0 && p->disponivel == 1)
         {
             return p;
         }

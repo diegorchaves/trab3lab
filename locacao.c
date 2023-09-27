@@ -12,20 +12,6 @@ Locacao *criaLocacaoLista(void)
     return NULL;
 }
 
-int estaLocado(Veiculo* veiculo, Locacao* listaLocacao, struct Date *retirada, struct Date *devolucao){
-    Locacao* p;
-
-    // PERCORRE LISTA DE LOCACOES ATE ENCONTRAR O VEICULO QUE FOI PASSADO
-    for(p = listaLocacao; p != NULL; p = p->prox){  
-        if(p->veiculo == veiculo){ // VERIFICA SE O VEICULO ESTA LOCADO NA DATA PASSADA
-            if(!(daysBetweenDates(*p->devolucao, *retirada) > 0 || daysBetweenDates(*devolucao, *p->retirada) > 0)){
-                return 1; // ESTA LOCADO
-            }
-        }
-    }
-
-    return 0; // NAO ESTA
-}
 
 int calculaValorPago(Veiculo* veiculo, struct Date *retirada, struct Date *devolucao){
     int dias;
@@ -36,27 +22,12 @@ int calculaValorPago(Veiculo* veiculo, struct Date *retirada, struct Date *devol
 
 }
 
-int achouPlaca (char placaLocal[8], char matrizPlacas [][8], int linhas)
-{
-    for (int i = 0; i < linhas; i++)
-    {
-        char vetor[8];
-        strcpy (vetor, matrizPlacas[i]);
-        if (strcmp(placaLocal, vetor) == 0)
-        {
-            return 1;
-        }
-    }
-    return 0;
-}
-
 
 void leDadosLocacao(Locacao* listaLocacao, Locacao *novo, Cliente *clienteLista, Veiculo *veiculoLista)
 {
-
     // PEGA NOME DO CLIENTE
     char nomeLocal[30];
-    char placaLocal[8];
+    
     getchar();
     do
     {
@@ -66,45 +37,30 @@ void leDadosLocacao(Locacao* listaLocacao, Locacao *novo, Cliente *clienteLista,
     } while (novo->cliente == NULL);
 
     // PEGA DATAS DE RETIRADA E DEVOLUCAO 
-    printf("Digite a data da locacao (DD MM AAAA): ");
+    printf("Digite a data de hoje (DD MM AAAA): ");
     scanf("%d %d %d", &novo->retirada->day, &novo->retirada->month, &novo->retirada->year);
 
     printf("Digite a data da devolucao (DD MM AAAA): ");
     scanf("%d %d %d", &novo->devolucao->day, &novo->devolucao->month, &novo->devolucao->year);
 
     // PREPARA PARA EXBIRIR LISTA DE CARROS DISPONIVEIS
-    Veiculo* p;
     if(veiculoLista == NULL){ // LISTA DE VEICULOS VAZIA
         printf("sem veiculos\n");
     }
-
-    int qtdCarros = 0;
-    for(p = veiculoLista; p != NULL; p = p->prox){
-        qtdCarros++;
-    }
-
-    char matrizPlacas[qtdCarros][8];
-    int i = 0;
-    
-    for(p = veiculoLista; p != NULL; p = p->prox){
-        if(estaLocado(p, listaLocacao, novo->retirada, novo->devolucao) == 0){ //PASSA TODA LISTA VEICULO PARA A FUNCAO QUE VERIFICA SE N ESTA LOCADO
-            printf("Veiculo Diponivel: %s , PLACA: %s \n", p->modelo, p->placa);
-            strcpy (matrizPlacas[i], p->placa);
-            i++;
-        }
-    }
-
+    imprimeVeiculoDisponiveis(veiculoLista);
 
     // ESCOLHE UM VEICULO PELA PLACA 
+    char placaLocal[8];
     do
     {
         getchar ();
         printf("Digite a placa do carro ");
         fgets(placaLocal, sizeof(placaLocal), stdin);
         novo->veiculo = procuraVeiculo(placaLocal, veiculoLista);
-    } while (novo->veiculo == NULL || achouPlaca (placaLocal, matrizPlacas, qtdCarros) == 0);
+    } while (novo->veiculo == NULL);
     
-
+    // TIRA DISPONIBILIDADE
+    novo->veiculo->disponivel = 0;
     // CALCULA VALOR PAGO
     novo->valorPago = calculaValorPago(novo->veiculo, novo->retirada, novo->devolucao);
 }
