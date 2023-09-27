@@ -18,7 +18,11 @@ int main()
 
     cliente1 = incluiCliente(cliente1);
     veiculo1 = incluiVeiculo(veiculo1);
+    veiculo1 = incluiVeiculo(veiculo1);
+
     locacao1 = incluiLocacao(locacao1, cliente1, veiculo1);
+    locacao1 = incluiLocacao(locacao1, cliente1, veiculo1);
+
 
     //imprimeCliente(cliente1);
     // imprimeVeiculoTodos(veiculo1);

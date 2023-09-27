@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "veiculo.h"
 #include "cliente.h"
 #include "locacao.h"
@@ -35,6 +36,21 @@ int calculaValorPago(Veiculo* veiculo, struct Date *retirada, struct Date *devol
 
 }
 
+int achouPlaca (char placaLocal[8], char matrizPlacas [][8], int linhas)
+{
+    for (int i = 0; i < linhas; i++)
+    {
+        char vetor[8];
+        strcpy (vetor, matrizPlacas[i]);
+        if (strcmp(placaLocal, vetor) == 0)
+        {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+
 void leDadosLocacao(Locacao* listaLocacao, Locacao *novo, Cliente *clienteLista, Veiculo *veiculoLista)
 {
 
@@ -62,20 +78,31 @@ void leDadosLocacao(Locacao* listaLocacao, Locacao *novo, Cliente *clienteLista,
         printf("sem veiculos\n");
     }
 
+    int qtdCarros = 0;
+    for(p = veiculoLista; p != NULL; p = p->prox){
+        qtdCarros++;
+    }
+
+    char matrizPlacas[qtdCarros][8];
+    int i = 0;
+    
     for(p = veiculoLista; p != NULL; p = p->prox){
         if(estaLocado(p, listaLocacao, novo->retirada, novo->devolucao) == 0){ //PASSA TODA LISTA VEICULO PARA A FUNCAO QUE VERIFICA SE N ESTA LOCADO
             printf("Veiculo Diponivel: %s , PLACA: %s \n", p->modelo, p->placa);
+            strcpy (matrizPlacas[i], p->placa);
+            i++;
         }
     }
 
+
     // ESCOLHE UM VEICULO PELA PLACA 
-    getchar();
     do
     {
+        getchar ();
         printf("Digite a placa do carro ");
         fgets(placaLocal, sizeof(placaLocal), stdin);
         novo->veiculo = procuraVeiculo(placaLocal, veiculoLista);
-    } while (novo->veiculo == NULL);
+    } while (novo->veiculo == NULL || achouPlaca (placaLocal, matrizPlacas, qtdCarros) == 0);
     
 
     // CALCULA VALOR PAGO

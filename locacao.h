@@ -23,3 +23,5 @@ void leDadosLocacao(Locacao* locacao, Locacao *novo, Cliente *clienteLista, Veic
 Locacao *incluiLocacao(Locacao *locacao, Cliente *clienteLista, Veiculo *veiculoLista);
 
 void imprimeLocacoes(Locacao* locacao);
+
+int achouPlaca (char placaLocal[8], char matrizPlacas[][8], int linhas);
