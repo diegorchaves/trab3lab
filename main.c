@@ -44,7 +44,7 @@ void leOpcao(int index, Veiculo **listaVeiculos, Cliente **listaClientes, Locaca
             // imprimeVeiculosDisponiveis(listaVeiculos);
             break;
         case 7: 
-            listarVeiculos(*listaVeiculos);
+            // listarVeiculos(listaVeiculos);
             break;
         case 8: 
             listarClientes(*listaClientes);
