@@ -53,6 +53,8 @@ void leDadosLocacao (Locacao *listaLocacao, Locacao *novo, Cliente *listaCliente
             novo->veiculo = realizaLocacao (placaLocal, listaVeiculos);
         } while (novo->veiculo == NULL);
     }
+
+    novo->valorPago = novo->veiculo->diaria * daysBetweenDates(*novo->retirada, *novo->devolucao);
 }
 
 Locacao *incluiLocacao (Locacao *listaLocacao, Cliente *listaClientes, Veiculo *listaVeiculos)
