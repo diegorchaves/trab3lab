@@ -2,13 +2,15 @@
 #include <stdlib.h>
 #include "veiculo.h"
 
-void imprimeVeiculosDisponiveis (Veiculo *listaVeiculos)
-{
+int imprimeVeiculosDisponiveis (Veiculo *listaVeiculos)
+{   
+    int i = 0;
     Veiculo *p;
     for (p = listaVeiculos; p != NULL; p = p->prox)
     {
         if (p->disponivel)
-        {
+        {   
+            i++;
             printf ("Placa: %s ||", p->placa);
             printf (" Marca: %s ||", p->marca);
             printf (" Modelo: %s ||", p->modelo);
@@ -16,6 +18,13 @@ void imprimeVeiculosDisponiveis (Veiculo *listaVeiculos)
             printf (" Quilometragem: %.2f ||", p->kilometragem);
             printf (" Valor diaria: %.2f\n", p->diaria);
         }
+    }
+
+    if(i == 0){
+        printf("Nenhum veiculo disponivel\n");
+        return 1;
+    }else{
+        return 0;
     }
 }
 
@@ -50,14 +59,22 @@ Veiculo *incluiVeiculos (Veiculo *listaVeiculos)
 }
 
 void listarVeiculos(Veiculo *listaVeiculos){
+
+    printf ("\nListando Veiculos...\n");
+
     Veiculo *p;
-    for (p = listaVeiculos; p != NULL; p = p->prox)
-    {
+    if(listaVeiculos == NULL){
+        printf("Lista vazia... \n");
+    }else{
+        for (p = listaVeiculos; p != NULL; p = p->prox)
+        {
             printf ("Placa: %s ||", p->placa);
             printf (" Marca: %s ||", p->marca);
             printf (" Modelo: %s ||", p->modelo);
             printf (" Ano de fabricacao: %d ||", p->anoFabricacao);
             printf (" Quilometragem: %.2f ||", p->kilometragem);
             printf (" Valor diaria: %.2f\n", p->diaria);
+        }
     }
+    
 }

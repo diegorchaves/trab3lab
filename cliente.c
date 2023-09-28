@@ -36,13 +36,20 @@ Cliente *incluiClientes (Cliente* listaClientes)
 }
 
 void listarClientes (Cliente *listaClientes)
-{
+{   
+
+    printf ("\nListando CLientes...\n");
     Cliente *p;
-    for (p = listaClientes; p != NULL; p = p->prox)
-    {
-        printf ("CNH: %d || ", p->cnh);
-        printf ("Nome: %s || ", p->nome);
-        printf ("Telefone: %d ||", p->telefone);
+    if(listaClientes == NULL){
+        printf("Lista vazia \n");
+    }else{
+        for (p = listaClientes; p != NULL; p = p->prox)
+        {   
+            printf ("Nome: %s || ", p->nome);
+            printf ("CNH: %d || ", p->cnh);
+            printf ("Telefone: %d \n", p->telefone);
+        }
     }
+    
     
 }

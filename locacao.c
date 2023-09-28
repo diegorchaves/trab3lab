@@ -20,7 +20,7 @@ Veiculo *realizaLocacao (char *placaLocal, Veiculo *listaVeiculos)
     return NULL;
 }
 
-void leDadosLocacao (Locacao *listaLocacao, Locacao *novo, Cliente *listaClientes, Veiculo *listaVeiculos)
+int leDadosLocacao (Locacao *listaLocacao, Locacao *novo, Cliente *listaClientes, Veiculo *listaVeiculos)
 {
     char nomeLocal[30];
     char placaLocal[8];
@@ -28,9 +28,9 @@ void leDadosLocacao (Locacao *listaLocacao, Locacao *novo, Cliente *listaCliente
     getchar ();
     do
     {
-        printf ("Digite o nome do cliente: ");
-        fgets (nomeLocal, sizeof(nomeLocal), stdin);
-        novo->cliente = procuraCliente (nomeLocal, listaClientes);
+       printf ("Digite o nome do cliente: ");
+       fgets (nomeLocal, sizeof(nomeLocal), stdin);
+       novo->cliente = procuraCliente (nomeLocal, listaClientes);
     } while (novo->cliente == NULL);
 
     printf ("Digite a data de hoje (DD MM AAAA): ");
@@ -45,7 +45,10 @@ void leDadosLocacao (Locacao *listaLocacao, Locacao *novo, Cliente *listaCliente
     }
     else
     {
-        imprimeVeiculosDisponiveis (listaVeiculos);
+        if(imprimeVeiculosDisponiveis (listaVeiculos)){
+            return 0;
+        }
+
         do
         {
             printf ("Digite a placa do veiculo desejado: ");
@@ -55,6 +58,8 @@ void leDadosLocacao (Locacao *listaLocacao, Locacao *novo, Cliente *listaCliente
     }
 
     novo->valorPago = novo->veiculo->diaria * daysBetweenDates(*novo->retirada, *novo->devolucao);
+
+    return 1;
 }
 
 Locacao *incluiLocacao (Locacao *listaLocacao, Cliente *listaClientes, Veiculo *listaVeiculos)
@@ -62,18 +67,30 @@ Locacao *incluiLocacao (Locacao *listaLocacao, Cliente *listaClientes, Veiculo *
     Locacao *novo = (Locacao*)malloc(sizeof(Locacao));
     novo->retirada = malloc(sizeof(int)*3);
     novo->devolucao = malloc(sizeof(int)*3);
-    leDadosLocacao (listaLocacao, novo, listaClientes, listaVeiculos);
-    novo->prox = listaLocacao;
-
-    return novo;
+    if(leDadosLocacao (listaLocacao, novo, listaClientes, listaVeiculos)){
+        novo->prox = listaLocacao;
+        return novo;
+    }
+    free(novo->retirada);
+    free(novo->devolucao);
+    free(novo);
+    return listaLocacao;
 }
 
 void listarLocacoes(Locacao *listaLocacao){
     Locacao *p;
-    for (p = listaLocacao; p != NULL; p = p->prox)
-    {
+
+    printf ("\nListando Locacoes...\n");
+
+    if(listaLocacao == NULL){
+        printf("Lista vazia... \n");
+    }else{
+        for (p = listaLocacao; p != NULL; p = p->prox)
+        {
             printf ("Cliente: %s ||", p->cliente->nome);
             printf (" Veiculo: %s ||", p->veiculo->placa);
             printf (" valor pago: %.2f ||", p->valorPago);
+        }
     }
+    
 }

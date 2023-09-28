@@ -13,7 +13,7 @@ typedef struct veiculo
 
 Veiculo *incluiVeiculos (Veiculo *listaVeiculos);
 
-void imprimeVeiculosDisponiveis (Veiculo *listaVeiculos);
+int imprimeVeiculosDisponiveis (Veiculo *listaVeiculos);
 
 void leDadosVeiculo (Veiculo *novo);
 

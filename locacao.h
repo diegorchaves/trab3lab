@@ -10,7 +10,7 @@ typedef struct locacao
 
 Veiculo *realizaLocacao (char *placaLocal, Veiculo *listaVeiculos);
 
-void leDadosLocacao (Locacao *listaLocacao, Locacao *novo, struct cliente *listaClientes, Veiculo *listaVeiculos);
+int leDadosLocacao (Locacao *listaLocacao, Locacao *novo, struct cliente *listaClientes, Veiculo *listaVeiculos);
 
 Locacao *incluiLocacao (Locacao *listaLocacao, struct cliente *listaClientes, Veiculo *listaVeiculos);
 
