@@ -23,17 +23,16 @@ void menu(){
     printf("------------------------------------|\n");
 }
 
-void leOpcao(int index, Veiculo *listaVeiculos, Cliente *listaClientes, Locacao *listaLocacoes){
+void leOpcao(int index, Veiculo **listaVeiculos, Cliente **listaClientes, Locacao **listaLocacoes){
     switch(index){
         case 1: 
-            listaVeiculos = incluiVeiculos(listaVeiculos);
+            *listaVeiculos = incluiVeiculos(*listaVeiculos);
             break;
         case 2: 
-            listaClientes = incluiClientes(listaClientes);
-            listarClientes(listaClientes);
+            *listaClientes = incluiClientes(*listaClientes);
             break;
         case 3: 
-            listaLocacoes = incluiLocacao(listaLocacoes, listaClientes, listaVeiculos);
+            *listaLocacoes = incluiLocacao(*listaLocacoes, *listaClientes, *listaVeiculos);
             break;
         case 4: 
             // devolveVeiculos(listaVeiculos);
@@ -42,16 +41,16 @@ void leOpcao(int index, Veiculo *listaVeiculos, Cliente *listaClientes, Locacao 
             // faturamento(listaVeiculos);
             break;
         case 6: 
-            imprimeVeiculosDisponiveis(listaVeiculos);
+            // imprimeVeiculosDisponiveis(listaVeiculos);
             break;
         case 7: 
-            listarVeiculos(listaVeiculos);
+            listarVeiculos(*listaVeiculos);
             break;
         case 8: 
-            listarClientes(listaClientes);
+            listarClientes(*listaClientes);
             break;
         case 9: 
-            listarLocacoes(listaLocacoes);
+            listarLocacoes(*listaLocacoes);
             break; 
         case 10: 
             //Historico(listaClientes);
@@ -75,7 +74,8 @@ int main ()
     do{
         menu();
         scanf(" %d", &index);
-        leOpcao(index, listaVeiculos, listaClientes, listaLocacoes);
+        leOpcao(index, &listaVeiculos, &listaClientes, &listaLocacoes);
+        
    }while(1);
     
 
