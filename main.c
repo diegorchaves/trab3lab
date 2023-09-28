@@ -4,7 +4,8 @@
 #include "cliente.h"
 #include "locacao.h"
 
-void menu(){
+void menu ()
+{
     printf("|---------------------------");
     printf("------------------------------------|\n");
     printf("|1 - Adicionar Veiculo    || ");
@@ -23,19 +24,21 @@ void menu(){
     printf("------------------------------------|\n");
 }
 
-void leOpcao(int index, Veiculo **listaVeiculos, Cliente **listaClientes, Locacao **listaLocacoes){
-    switch(index){
+void leOpcao (int index, Veiculo **listaVeiculos, Cliente **listaClientes, Locacao **listaLocacoes)
+{
+    switch (index)
+    {
         case 1: 
-            *listaVeiculos = incluiVeiculos(*listaVeiculos);
+            *listaVeiculos = incluiVeiculos (*listaVeiculos);
             break;
         case 2: 
-            *listaClientes = incluiClientes(*listaClientes);
+            *listaClientes = incluiClientes (*listaClientes);
             break;
         case 3: 
-            *listaLocacoes = incluiLocacao(*listaLocacoes, *listaClientes, *listaVeiculos);
+            *listaLocacoes = incluiLocacao (*listaLocacoes, *listaClientes, *listaVeiculos);
             break;
         case 4: 
-            // devolveVeiculos(listaVeiculos);
+            devolveVeiculo (*listaVeiculos, *listaClientes, *listaLocacoes);
             break;
         case 5: 
             // faturamento(listaVeiculos);

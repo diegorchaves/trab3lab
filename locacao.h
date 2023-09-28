@@ -15,3 +15,6 @@ void leDadosLocacao (Locacao *listaLocacao, Locacao *novo, struct cliente *lista
 Locacao *incluiLocacao (Locacao *listaLocacao, struct cliente *listaClientes, Veiculo *listaVeiculos);
 
 void listarLocacoes(Locacao *listaLocacao);
+
+void devolveVeiculo (Veiculo *listaVeiculos, struct cliente *listaClientes, Locacao *listaLocacoes);
+

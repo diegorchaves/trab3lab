@@ -41,8 +41,8 @@ void listarClientes (Cliente *listaClientes)
     for (p = listaClientes; p != NULL; p = p->prox)
     {
         printf ("CNH: %d || ", p->cnh);
-        printf ("Nome: %s || ", p->nome);
-        printf ("Telefone: %d ||", p->telefone);
+        printf ("Telefone: %d || ", p->telefone);
+        printf ("Nome: %s", p->nome);
     }
-    
+    printf ("\n");
 }

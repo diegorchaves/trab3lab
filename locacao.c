@@ -6,6 +6,42 @@
 #include "cliente.h"
 #include "datas.h"
 
+void devolveVeiculo (Veiculo *listaVeiculos, struct cliente *listaClientes, Locacao *listaLocacoes)
+{
+    Cliente *p;
+    int devolver;
+    char nomeLocal[30];
+    printf ("Locacoes ativas: \n\n");
+    listarLocacoes (listaLocacoes);
+    getchar ();
+    do
+    {
+        printf ("Informe o nome do cliente: ");
+        fgets (nomeLocal, sizeof(nomeLocal), stdin);
+        p = procuraCliente (nomeLocal, listaClientes);
+    } while (p == NULL);
+
+    Locacao *l = listaLocacoes;
+    while (l != NULL && l->cliente != p)
+    {
+        l = l->prox;
+    }
+    if (l == NULL)
+    {
+        printf ("O cliente %s nao tem locacao ativa.\n", nomeLocal);
+        return;
+    }
+
+    printf ("O cliente %s esta com a seguinte locacao ativa: \n\n", l->cliente->nome);
+    listarLocacoes (l);
+    printf ("Deseja devolver o carro (1 para sim, 0 para nao): ");
+    scanf ("%d", &devolver);
+    if (devolver)
+    {
+        l->veiculo->disponivel = 1;
+    }
+}
+
 Veiculo *realizaLocacao (char *placaLocal, Veiculo *listaVeiculos)
 {
     Veiculo *p;
@@ -72,8 +108,8 @@ void listarLocacoes(Locacao *listaLocacao){
     Locacao *p;
     for (p = listaLocacao; p != NULL; p = p->prox)
     {
-            printf ("Cliente: %s ||", p->cliente->nome);
-            printf (" Veiculo: %s ||", p->veiculo->placa);
-            printf (" valor pago: %.2f ||", p->valorPago);
+        printf ("Veiculo: %s ||", p->veiculo->placa);
+        printf (" Valor pago: %.2f ||", p->valorPago);
+        printf (" Cliente: %s ", p->cliente->nome);
     }
 }

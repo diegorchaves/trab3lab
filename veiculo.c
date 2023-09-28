@@ -53,11 +53,11 @@ void listarVeiculos(Veiculo *listaVeiculos){
     Veiculo *p;
     for (p = listaVeiculos; p != NULL; p = p->prox)
     {
-            printf ("Placa: %s ||", p->placa);
-            printf (" Marca: %s ||", p->marca);
-            printf (" Modelo: %s ||", p->modelo);
-            printf (" Ano de fabricacao: %d ||", p->anoFabricacao);
-            printf (" Quilometragem: %.2f ||", p->kilometragem);
-            printf (" Valor diaria: %.2f\n", p->diaria);
+        printf ("Placa: %s ||", p->placa);
+        printf (" Marca: %s ||", p->marca);
+        printf (" Modelo: %s ||", p->modelo);
+        printf (" Ano de fabricacao: %d ||", p->anoFabricacao);
+        printf (" Quilometragem: %.2f ||", p->kilometragem);
+        printf (" Valor diaria: %.2f\n", p->diaria);
     }
 }
