@@ -35,13 +35,13 @@ void leOpcao(int index, Veiculo **listaVeiculos, Cliente **listaClientes, Locaca
             *listaLocacoes = incluiLocacao(*listaLocacoes, *listaClientes, *listaVeiculos);
             break;
         case 4: 
-            // devolveVeiculos(listaVeiculos);
+            *listaLocacoes = devolveLocacao(*listaLocacoes, *listaVeiculos);
             break;
         case 5: 
             // faturamento(listaVeiculos);
             break;
         case 6: 
-            // imprimeVeiculosDisponiveis(listaVeiculos);
+            imprimeVeiculosDisponiveis(*listaVeiculos);
             break;
         case 7: 
             listarVeiculos(*listaVeiculos);
@@ -73,6 +73,7 @@ int main ()
    
     do{
         menu();
+        printf("Digite um codigo de menu: ");
         scanf(" %d", &index);
         leOpcao(index, &listaVeiculos, &listaClientes, &listaLocacoes);
         

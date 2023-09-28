@@ -17,6 +17,32 @@ Veiculo *realizaLocacao (char *placaLocal, Veiculo *listaVeiculos)
             return p;
         }
     }
+
+    printf("Veiculo nao encontrado...\n");
+    return NULL;
+}
+
+Locacao *realizaDevolucao (char *placaLocal, Locacao **listaLocacao)
+{
+    Locacao *p;
+    Locacao *ant = NULL;
+
+    for (p = *listaLocacao; p != NULL; p = p->prox)
+    {   
+        if (p->veiculo->disponivel == 0 && strcmp (placaLocal, p->veiculo->placa) == 0)
+        {
+            p->veiculo->disponivel = 1;
+            if(ant == NULL){
+                *listaLocacao = p->prox;
+            }else{
+                ant->prox = p->prox;
+            }
+            return p;
+        }
+        ant = p;
+    }
+
+    printf("Veiculo nao encontrado...\n");
     return NULL;
 }
 
@@ -77,7 +103,8 @@ Locacao *incluiLocacao (Locacao *listaLocacao, Cliente *listaClientes, Veiculo *
     return listaLocacao;
 }
 
-void listarLocacoes(Locacao *listaLocacao){
+void listarLocacoes(Locacao *listaLocacao)
+{
     Locacao *p;
 
     printf ("\nListando Locacoes...\n");
@@ -89,8 +116,29 @@ void listarLocacoes(Locacao *listaLocacao){
         {
             printf ("Cliente: %s ||", p->cliente->nome);
             printf (" Veiculo: %s ||", p->veiculo->placa);
-            printf (" valor pago: %.2f ||", p->valorPago);
+            printf (" valor pago: %.2f ||\n", p->valorPago);
         }
     }
     
 }
+
+Locacao *devolveLocacao (Locacao *listaLocacao, Veiculo *listaVeiculos)
+{
+    listarLocacoes(listaLocacao);
+
+    char placaLocal[8];
+    Locacao *locacaoLocal;
+    do
+    {
+        printf ("Digite a placa do veiculo que deseja devolver: ");
+        scanf (" %s", placaLocal);
+        locacaoLocal = realizaDevolucao(placaLocal, &listaLocacao);
+    } while (locacaoLocal == NULL);
+
+
+    free(locacaoLocal);
+    printf ("Veiculo Devolvido...\n");
+
+    return listaLocacao;
+}
+
