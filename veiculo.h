@@ -1,7 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
-
-struct veiculo{
+typedef struct veiculo
+{
     int id;
     char placa[8];
     char marca[15];
@@ -10,18 +8,13 @@ struct veiculo{
     float kilometragem;
     float diaria;
     int disponivel;
-    struct veiculo* prox;
-};
-typedef struct veiculo Veiculo;
+    struct veiculo *prox;
+} Veiculo;
 
-Veiculo* criaVeiculoLista(void);
+Veiculo *incluiVeiculos (Veiculo *listaVeiculos);
 
-void leDadosVeiculo(Veiculo* novo);
+void imprimeVeiculosDisponiveis (Veiculo *listaVeiculos);
 
-Veiculo* incluiVeiculo(Veiculo* veiculo);
+void leDadosVeiculo (Veiculo *novo);
 
-void imprimeVeiculoTodos(Veiculo* veiculo);
-
-void imprimeVeiculoDisponiveis(Veiculo* veiculo);
-
-Veiculo *procuraVeiculo(char placa[8], Veiculo *veiculoLista);
+void listarVeiculos(Veiculo *listaVeiculos);

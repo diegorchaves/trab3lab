@@ -1,20 +1,17 @@
-#include <stdio.h>
 #include <stdlib.h>
 
-struct cliente{
+typedef struct cliente 
+{
     int cnh;
     char nome[30];
     int telefone;
-    struct cliente* prox;
-};
-typedef struct cliente Cliente;
+    struct cliente *prox;
+} Cliente;
 
-Cliente* criaClienteLista(void);
+Cliente *procuraCliente (char *nomeLocal, Cliente *listaClientes);
 
-void leDadosCliente(Cliente* novo);
+void leDadosCliente (Cliente *novo);
 
-Cliente* incluiCliente(Cliente* cliente);
+Cliente *incluiClientes (Cliente* listaClientes);
 
-void imprimeCliente(Cliente* cliente);
-
-Cliente *procuraCliente(char nome[30], Cliente *clienteLista);
+void listarClientes (Cliente *listaClientes);

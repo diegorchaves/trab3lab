@@ -1,23 +1,17 @@
-#include <stdio.h>
-#include <stdlib.h>
-
-struct locacao
+typedef struct locacao
 {
-    Cliente *cliente;
-    Veiculo *veiculo;
-    struct Date *retirada;
-    struct Date *devolucao;
+    struct cliente *cliente;
+    struct veiculo *veiculo;
+    struct data *retirada;
+    struct data *devolucao;
     float valorPago;
     struct locacao *prox;
-};
-typedef struct locacao Locacao;
+} Locacao;
 
-Locacao *criaLocacaoLista(void);
+Veiculo *realizaLocacao (char *placaLocal, Veiculo *listaVeiculos);
 
-int calculaValorPago(Veiculo* veiculo, struct Date *retirada, struct Date *devolucao);
+void leDadosLocacao (Locacao *listaLocacao, Locacao *novo, struct cliente *listaClientes, Veiculo *listaVeiculos);
 
-void leDadosLocacao(Locacao* locacao, Locacao *novo, Cliente *clienteLista, Veiculo *veiculoLista);
+Locacao *incluiLocacao (Locacao *listaLocacao, struct cliente *listaClientes, Veiculo *listaVeiculos);
 
-Locacao *incluiLocacao(Locacao *locacao, Cliente *clienteLista, Veiculo *veiculoLista);
-
-void imprimeLocacoes(Locacao* locacao);
+void listarLocacoes(Locacao *listaLocacao);
