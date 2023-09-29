@@ -4,10 +4,14 @@
 
 void imprimeVeiculosDisponiveis (Veiculo *listaVeiculos)
 {
-    Veiculo *p;
-    for (p = listaVeiculos; p != NULL; p = p->prox)
+    Veiculo *p = listaVeiculos;
+    if (p == NULL)
     {
-        if (p->disponivel)
+        printf ("Nao existem veiculos disponiveis.\n");
+    }
+    else
+    {
+        while (p != NULL && p->disponivel == 1)
         {
             printf ("Placa: %s ||", p->placa);
             printf (" Marca: %s ||", p->marca);
@@ -15,6 +19,7 @@ void imprimeVeiculosDisponiveis (Veiculo *listaVeiculos)
             printf (" Ano de fabricacao: %d ||", p->anoFabricacao);
             printf (" Quilometragem: %.2f ||", p->kilometragem);
             printf (" Valor diaria: %.2f\n", p->diaria);
+            p = p->prox;
         }
     }
 }
@@ -50,14 +55,22 @@ Veiculo *incluiVeiculos (Veiculo *listaVeiculos)
 }
 
 void listarVeiculos(Veiculo *listaVeiculos){
-    Veiculo *p;
-    for (p = listaVeiculos; p != NULL; p = p->prox)
+    Veiculo *p = listaVeiculos;
+    if (p == NULL)
     {
-        printf ("Placa: %s ||", p->placa);
-        printf (" Marca: %s ||", p->marca);
-        printf (" Modelo: %s ||", p->modelo);
-        printf (" Ano de fabricacao: %d ||", p->anoFabricacao);
-        printf (" Quilometragem: %.2f ||", p->kilometragem);
-        printf (" Valor diaria: %.2f\n", p->diaria);
+        printf ("Nao existem veiculos cadastrados.\n");
+    }
+    else
+    {
+        while (p != NULL)
+        {
+            printf ("Placa: %s ||", p->placa);
+            printf (" Marca: %s ||", p->marca);
+            printf (" Modelo: %s ||", p->modelo);
+            printf (" Ano de fabricacao: %d ||", p->anoFabricacao);
+            printf (" Quilometragem: %.2f ||", p->kilometragem);
+            printf (" Valor diaria: %.2f\n", p->diaria);
+            p = p->prox;
+        }
     }
 }

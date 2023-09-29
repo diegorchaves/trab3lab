@@ -18,3 +18,5 @@ void listarLocacoes(Locacao *listaLocacao);
 
 void devolveVeiculo (Veiculo *listaVeiculos, struct cliente *listaClientes, Locacao *listaLocacoes);
 
+Locacao *liberaLocacao (Locacao *listaLocacoes, Locacao *excluir);
+
