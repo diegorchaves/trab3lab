@@ -11,10 +11,10 @@ typedef struct veiculo
     struct veiculo *prox;
 } Veiculo;
 
-Veiculo *incluiVeiculos (Veiculo *listaVeiculos);
+Veiculo *incluiVeiculo (Veiculo *lstVeiculos);
 
-void imprimeVeiculosDisponiveis (Veiculo *listaVeiculos);
+void imprimeVeiculosDisponiveis (Veiculo *lstVeiculos);
 
 void leDadosVeiculo (Veiculo *novo);
 
-void listarVeiculos(Veiculo *listaVeiculos);
+void imprimeVeiculos (Veiculo *lstVeiculos);

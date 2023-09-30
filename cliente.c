@@ -3,10 +3,10 @@
 #include <string.h>
 #include "cliente.h"
 
-Cliente *procuraCliente (char *nomeLocal, Cliente *listaClientes)
+Cliente *procuraCliente (char *nomeLocal, Cliente *lstClientes)
 {
     Cliente *p;
-    for (p = listaClientes; p != NULL; p = p->prox)
+    for (p = lstClientes; p != NULL; p = p->prox)
     {
         if (strcmp(nomeLocal, p->nome) == 0)
         {
@@ -28,17 +28,17 @@ void leDadosCliente (Cliente *novo)
     scanf ("%d", &novo->telefone);
 }
 
-Cliente *incluiClientes (Cliente* listaClientes)
+Cliente *incluiCliente (Cliente *lstClientes)
 {
     Cliente *novo = (Cliente*)malloc(sizeof(Cliente));
     leDadosCliente (novo);
-    novo->prox = listaClientes;
+    novo->prox = lstClientes;
     return novo;
 }
 
-void listarClientes (Cliente *listaClientes)
+void imprimeClientes (Cliente *lstClientes)
 {
-    Cliente *p = listaClientes;
+    Cliente *p = lstClientes;
     if (p == NULL)
     {
         printf ("Nao existem clientes cadastrados.\n");

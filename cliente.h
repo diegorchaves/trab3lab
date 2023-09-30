@@ -8,10 +8,10 @@ typedef struct cliente
     struct cliente *prox;
 } Cliente;
 
-Cliente *procuraCliente (char *nomeLocal, Cliente *listaClientes);
+Cliente *procuraCliente (char *nomeLocal, Cliente *lstClientes);
 
 void leDadosCliente (Cliente *novo);
 
-Cliente *incluiClientes (Cliente* listaClientes);
+Cliente *incluiCliente (Cliente *lstClientes);
 
-void listarClientes (Cliente *listaClientes);
+void imprimeClientes (Cliente *lstClientes);

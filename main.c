@@ -24,42 +24,42 @@ void menu ()
     printf("------------------------------------|\n");
 }
 
-void leOpcao (int index, Veiculo **listaVeiculos, Cliente **listaClientes, Locacao **listaLocacoes)
+void leOpcaoMenu (int index, Veiculo **lstVeiculos, Cliente **lstClientes, Locacao **lstLocacoes)
 {
     switch (index)
     {
         case 1: 
-            *listaVeiculos = incluiVeiculos (*listaVeiculos);
+            *lstVeiculos = incluiVeiculo (*lstVeiculos);
             break;
         case 2: 
-            *listaClientes = incluiClientes (*listaClientes);
+            *lstClientes = incluiCliente (*lstClientes);
             break;
         case 3: 
-            *listaLocacoes = incluiLocacao (*listaLocacoes, *listaClientes, *listaVeiculos);
+            *lstLocacoes = incluiLocacao (*lstLocacoes, *lstClientes, *lstVeiculos);
             break;
         case 4: 
-            devolveVeiculo (*listaLocacoes);
+            leDadosDevolucao (*lstLocacoes);
             break;
         case 5: 
-            // faturamento(listaVeiculos);
+            calculaFaturamento (*lstLocacoes);
             break;
         case 6: 
-            imprimeVeiculosDisponiveis(*listaVeiculos);
+            imprimeVeiculosDisponiveis(*lstVeiculos);
             break;
         case 7: 
-            listarVeiculos(*listaVeiculos);
+            imprimeVeiculos(*lstVeiculos);
             break;
         case 8: 
-            listarClientes(*listaClientes);
+            imprimeClientes (*lstClientes);
             break;
         case 9: 
-            listarLocacoesAtivas(*listaLocacoes);
+            imprimeLocacoesAtivas (*lstLocacoes);
             break; 
         case 10: 
-            //Historico(listaClientes);
+            //Historico(lstClientes);
             break;
         case 11: 
-            //maisRodados(listaLocacoes);
+            //maisRodados(lstLocacoes);
             break;
         default:
             break;  
@@ -69,15 +69,15 @@ void leOpcao (int index, Veiculo **listaVeiculos, Cliente **listaClientes, Locac
 int main ()
 {   
     int index;
-    Veiculo *listaVeiculos = NULL;
-    Cliente *listaClientes = NULL;
-    Locacao *listaLocacoes = NULL;
+    Veiculo *lstVeiculos = NULL;
+    Cliente *lstClientes = NULL;
+    Locacao *lstLocacoes = NULL;
 
     do
     {
         menu();
-        scanf(" %d", &index);
-        leOpcao(index, &listaVeiculos, &listaClientes, &listaLocacoes);
+        scanf("%d", &index);
+        leOpcaoMenu(index, &lstVeiculos, &lstClientes, &lstLocacoes);
     } while(1);
 
 }

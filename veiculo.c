@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include "veiculo.h"
 
-void imprimeVeiculosDisponiveis (Veiculo *listaVeiculos)
+void imprimeVeiculosDisponiveis (Veiculo *lstVeiculos)
 {
-    Veiculo *p = listaVeiculos;
+    Veiculo *p = lstVeiculos;
     if (p == NULL)
     {
         printf ("Nao existem veiculos disponiveis.\n");
@@ -41,7 +41,7 @@ void leDadosVeiculo (Veiculo *novo)
     novo->disponivel = 1;
 }
 
-Veiculo *incluiVeiculos (Veiculo *listaVeiculos)
+Veiculo *incluiVeiculo (Veiculo *lstVeiculos)
 {
     Veiculo *novo = (Veiculo*)malloc(sizeof(Veiculo));
     if (novo == NULL)
@@ -49,13 +49,14 @@ Veiculo *incluiVeiculos (Veiculo *listaVeiculos)
         printf ("Erro ao alocar veiculo.\n");
         exit (1);
     }
-    novo->prox = listaVeiculos;
+    novo->prox = lstVeiculos;
     leDadosVeiculo (novo);
     return novo;
 }
 
-void listarVeiculos(Veiculo *listaVeiculos){
-    Veiculo *p = listaVeiculos;
+void imprimeVeiculos (Veiculo *lstVeiculos)
+{
+    Veiculo *p = lstVeiculos;
     if (p == NULL)
     {
         printf ("Nao existem veiculos cadastrados.\n");
