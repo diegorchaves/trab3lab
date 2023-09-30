@@ -7,22 +7,22 @@
 
 void menu ()
 {
-    printf("|---------------------------");
-    printf("------------------------------------|\n");
-    printf("|1 - Adicionar Veiculo    || ");
+    printf("+-------------------------+-");
+    printf("-----------------------------------+\n");
+    printf("|1 - Adicionar Veiculo    | ");
     printf("7 - Listar Veiculos                |\n");
-    printf("|2 - Adicionar Clientes   || ");
+    printf("|2 - Adicionar Clientes   | ");
     printf("8 - Listar Clientes                |\n");
-    printf("|3 - Adicionar Locacao    || ");
+    printf("|3 - Adicionar Locacao    | ");
     printf("9 - Listar Locacoes ativas         |\n");
-    printf("|4 - Devolver Veiculo     || ");
+    printf("|4 - Devolver Veiculo     | ");
     printf("10 - Historico Locacoes de Cliente |\n");
-    printf("|5 - Faturamento mensal   || ");
+    printf("|5 - Faturamento mensal   | ");
     printf("11 - Veiculos mais rodados         |\n");
-    printf("|6 - Veiculos Disponiveis || ");
-    printf("                                   |\n");
-    printf("|---------------------------");
-    printf("------------------------------------|\n");
+    printf("|6 - Veiculos Disponiveis | ");
+    printf("12 - Sair                          |\n");
+    printf("+-------------------------+-");
+    printf("-----------------------------------+\n");
 }
 
 void leOpcaoMenu (int index, Veiculo **lstVeiculos, Cliente **lstClientes, Locacao **lstLocacoes)
@@ -63,6 +63,9 @@ void leOpcaoMenu (int index, Veiculo **lstVeiculos, Cliente **lstClientes, Locac
         case 11: 
             maisRodados(*lstVeiculos);
             break;
+        case 12:
+            printf("Encerrando programa...\n");
+            exit(1);
         default:
             break;  
     }
