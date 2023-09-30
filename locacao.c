@@ -6,10 +6,69 @@
 #include "cliente.h"
 #include "datas.h"
 
-Veiculo *realizaLocacao (char *placaLocal, Veiculo *listaVeiculos)
+void calculaFaturamento (Locacao *lstLocacoes)
+{
+    float faturamentoMensal = 0;
+    Date *mesLocal = (Date*)malloc(sizeof(Date));
+    Locacao *p;
+    printf ("Digite o mes (MM): ");
+    scanf ("%d", &mesLocal->month);
+    for (p = lstLocacoes; p != NULL; p = p->prox)
+    {
+        if (p->retirada->month == mesLocal->month)
+        {
+            faturamentoMensal += p->valorPago;
+        }
+    }
+    printf ("O faturamento do mes %d foi de %.2f\n", mesLocal->month, faturamentoMensal);
+}
+
+void realizaDevolucao (char *placaLocal, Locacao **lstLocacoes, Date *dataLocal)
+{
+    float kmLocal;
+    Locacao *p;
+    Locacao *ant = NULL;
+
+    for (p = *lstLocacoes; p != NULL; p = p->prox)
+    {
+        if (p->veiculo->disponivel == 0 && strcmp (placaLocal, p->veiculo->placa) == 0)
+        {
+            p->veiculo->disponivel = 1;
+            printf ("Digite a quilometragem atual: ");
+            scanf ("%f", &kmLocal);
+            p->veiculo->kilometragem = kmLocal;
+            p->devolucao = dataLocal;
+            return;
+        }
+    }
+    printf ("Placa nao encontrada, por favor verifique.\n");
+}
+
+void leDadosDevolucao (Locacao *lstLocacoes)
+{
+    if (lstLocacoes == NULL)
+    {
+        printf ("Nao existem locacoes.\n");
+        return;
+    }
+
+    Date *dataLocal = pedeData(dataLocal);
+    imprimeLocacoesAtivas (lstLocacoes, dataLocal);
+
+    char placaLocal[8];
+    Locacao *locacaoLocal;
+    do
+    {
+        printf ("Digite a placa do veiculo que deseja devolver: ");
+        scanf ("%s", placaLocal);
+        realizaDevolucao (placaLocal, &lstLocacoes, dataLocal);
+    } while (locacaoLocal == NULL);
+}
+
+Veiculo *realizaLocacao (char *placaLocal, Veiculo *lstVeiculos)
 {
     Veiculo *p;
-    for (p = listaVeiculos; p != NULL; p = p->prox)
+    for (p = lstVeiculos; p != NULL; p = p->prox)
     {
         if (p->disponivel == 1 && strcmp (placaLocal, p->placa) == 0)
         {
@@ -17,36 +76,10 @@ Veiculo *realizaLocacao (char *placaLocal, Veiculo *listaVeiculos)
             return p;
         }
     }
-
-    printf("Veiculo nao encontrado...\n");
     return NULL;
 }
 
-Locacao *realizaDevolucao (char *placaLocal, Locacao **listaLocacao)
-{
-    Locacao *p;
-    Locacao *ant = NULL;
-
-    for (p = *listaLocacao; p != NULL; p = p->prox)
-    {   
-        if (p->veiculo->disponivel == 0 && strcmp (placaLocal, p->veiculo->placa) == 0)
-        {
-            p->veiculo->disponivel = 1;
-            if(ant == NULL){
-                *listaLocacao = p->prox;
-            }else{
-                ant->prox = p->prox;
-            }
-            return p;
-        }
-        ant = p;
-    }
-
-    printf("Veiculo nao encontrado...\n");
-    return NULL;
-}
-
-int leDadosLocacao (Locacao *listaLocacao, Locacao *novo, Cliente *listaClientes, Veiculo *listaVeiculos)
+void leDadosLocacao (Locacao *lstLocacoes, Locacao *novo, Cliente *lstClientes, Veiculo *lstVeiculos)
 {
     char nomeLocal[30];
     char placaLocal[8];
@@ -54,9 +87,14 @@ int leDadosLocacao (Locacao *listaLocacao, Locacao *novo, Cliente *listaClientes
     getchar ();
     do
     {
-       printf ("Digite o nome do cliente: ");
-       fgets (nomeLocal, sizeof(nomeLocal), stdin);
-       novo->cliente = procuraCliente (nomeLocal, listaClientes);
+        printf ("Digite o nome do cliente: ");
+        fgets (nomeLocal, sizeof(nomeLocal), stdin);
+        nomeLocal[strcspn(nomeLocal, "\n")] = '\0';
+        novo->cliente = procuraCliente (nomeLocal, lstClientes);
+        if (novo->cliente == NULL)
+        {
+            printf ("Cliente nao encontrado, verifique o nome.\n");
+        }
     } while (novo->cliente == NULL);
 
     printf ("Digite a data de hoje (DD MM AAAA): ");
@@ -65,80 +103,55 @@ int leDadosLocacao (Locacao *listaLocacao, Locacao *novo, Cliente *listaClientes
     printf ("Digite a data da devolucao (DD MM AAAA): ");
     scanf ("%d %d %d", &novo->devolucao->day, &novo->devolucao->month, &novo->devolucao->year);
 
-    if (listaVeiculos == NULL)
+    if (lstVeiculos == NULL)
     {
         printf ("Nao existem veiculos cadastrados.\n");
     }
     else
     {
-        if(imprimeVeiculosDisponiveis (listaVeiculos)){
-            return 0;
-        }
-
+        imprimeVeiculosDisponiveis (lstVeiculos);
         do
         {
             printf ("Digite a placa do veiculo desejado: ");
             scanf ("%s", placaLocal);
-            novo->veiculo = realizaLocacao (placaLocal, listaVeiculos);
+            novo->veiculo = realizaLocacao (placaLocal, lstVeiculos);
+            if (novo->veiculo == NULL)
+            {
+                printf ("Veiculo nao encontrado, verifique a placa.\n");
+            }
         } while (novo->veiculo == NULL);
     }
 
-    novo->valorPago = novo->veiculo->diaria * daysBetweenDates(*novo->retirada, *novo->devolucao);
-
-    return 1;
+    novo->valorPago = novo->veiculo->diaria * daysBetweenDates (*novo->retirada, *novo->devolucao);
 }
 
-Locacao *incluiLocacao (Locacao *listaLocacao, Cliente *listaClientes, Veiculo *listaVeiculos)
+Locacao *incluiLocacao (Locacao *lstLocacoes, Cliente *lstClientes, Veiculo *lstVeiculos)
 {
     Locacao *novo = (Locacao*)malloc(sizeof(Locacao));
-    novo->retirada = malloc(sizeof(int)*3);
-    novo->devolucao = malloc(sizeof(int)*3);
-    if(leDadosLocacao (listaLocacao, novo, listaClientes, listaVeiculos)){
-        novo->prox = listaLocacao;
-        return novo;
-    }
-    free(novo->retirada);
-    free(novo->devolucao);
-    free(novo);
-    return listaLocacao;
+    novo->retirada = (Date*)malloc(sizeof(int)*3);
+    novo->devolucao = (Date*)malloc(sizeof(int)*3);
+    leDadosLocacao (lstLocacoes, novo, lstClientes, lstVeiculos);
+    novo->prox = lstLocacoes;
+
+    return novo;
 }
 
-void listarLocacoes(Locacao *listaLocacao)
+void imprimeLocacoesAtivas (Locacao *lstLocacoes, Date *dataLocal)
 {
-    Locacao *p;
-
-    printf ("\nListando Locacoes...\n");
-
-    if(listaLocacao == NULL){
-        printf("Lista vazia... \n");
-    }else{
-        for (p = listaLocacao; p != NULL; p = p->prox)
+    Locacao *p = lstLocacoes;
+    
+    if (p == NULL)
+    {
+        printf ("Nao existem locacoes ativas.\n");
+    }
+    else
+    { 
+        while (p != NULL && (daysBetweenDates (*dataLocal, *p->devolucao) > 0) && p->veiculo->disponivel == 0)
         {
-            printf ("Cliente: %s ||", p->cliente->nome);
-            printf (" Veiculo: %s ||", p->veiculo->placa);
-            printf (" valor pago: %.2f ||\n", p->valorPago);
+            printf ("Cliente: %s || ", p->cliente->nome);
+            printf ("Veiculo: %s || ", p->veiculo->placa);
+            printf ("Valor pago: %.2f\n", p->valorPago);
+            p = p->prox;
         }
     }
-    
 }
-
-Locacao *devolveLocacao (Locacao *listaLocacao, Veiculo *listaVeiculos)
-{
-    listarLocacoes(listaLocacao);
-
-    char placaLocal[8];
-    Locacao *locacaoLocal;
-    do
-    {
-        printf ("Digite a placa do veiculo que deseja devolver: ");
-        scanf (" %s", placaLocal);
-        locacaoLocal = realizaDevolucao(placaLocal, &listaLocacao);
-    } while (locacaoLocal == NULL);
-
-
-    free(locacaoLocal);
-    printf ("Veiculo Devolvido...\n");
-
-    return listaLocacao;
-}
-

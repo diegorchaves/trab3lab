@@ -8,14 +8,18 @@ typedef struct locacao
     struct locacao *prox;
 } Locacao;
 
-Veiculo *realizaLocacao (char *placaLocal, Veiculo *listaVeiculos);
+Veiculo *realizaLocacao (char *placaLocal, Veiculo *lstVeiculos);
 
-Locacao *realizaDevolucao (char *placaLocal, Locacao **listaLocacao);
+void leDadosLocacao (Locacao *lstLocacoes, Locacao *novo, struct cliente *lstClientes, Veiculo *lstVeiculos);
 
-int leDadosLocacao (Locacao *listaLocacao, Locacao *novo, struct cliente *listaClientes, Veiculo *listaVeiculos);
+Locacao *incluiLocacao (Locacao *lstLocacoes, struct cliente *lstClientes, Veiculo *lstVeiculos);
 
-Locacao *incluiLocacao (Locacao *listaLocacao, struct cliente *listaClientes, Veiculo *listaVeiculos);
+void imprimeLocacoesAtivas (Locacao *lstLocacoes, struct data *dataLocal);
 
-void listarLocacoes(Locacao *listaLocacao);
+void realizaDevolucao (char *placaLocal, Locacao **lstLocacoes, struct data *dataLocal);
 
-Locacao *devolveLocacao (Locacao *listaLocacao, Veiculo *listaVeiculos);
+void leDadosDevolucao (Locacao *lstLocacoes);
+
+void calculaFaturamento (Locacao *lstLocacoes);
+
+

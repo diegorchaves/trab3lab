@@ -3,10 +3,10 @@
 #include <string.h>
 #include "cliente.h"
 
-Cliente *procuraCliente (char *nomeLocal, Cliente *listaClientes)
+Cliente *procuraCliente (char *nomeLocal, Cliente *lstClientes)
 {
     Cliente *p;
-    for (p = listaClientes; p != NULL; p = p->prox)
+    for (p = lstClientes; p != NULL; p = p->prox)
     {
         if (strcmp(nomeLocal, p->nome) == 0)
         {
@@ -23,33 +23,35 @@ void leDadosCliente (Cliente *novo)
     getchar ();
     printf ("Digite o nome do cliente: \n");
     fgets (novo->nome, sizeof(novo->nome), stdin);
+    novo->nome[strcspn(novo->nome, "\n")] = '\0';
     printf ("Digite o telefone do cliente: \n");
     scanf ("%d", &novo->telefone);
 }
 
-Cliente *incluiClientes (Cliente* listaClientes)
+Cliente *incluiCliente (Cliente *lstClientes)
 {
     Cliente *novo = (Cliente*)malloc(sizeof(Cliente));
     leDadosCliente (novo);
-    novo->prox = listaClientes;
+    novo->prox = lstClientes;
     return novo;
 }
 
-void listarClientes (Cliente *listaClientes)
-{   
-
-    printf ("\nListando CLientes...\n");
-    Cliente *p;
-    if(listaClientes == NULL){
-        printf("Lista vazia \n");
-    }else{
-        for (p = listaClientes; p != NULL; p = p->prox)
-        {   
+void imprimeClientes (Cliente *lstClientes)
+{
+    Cliente *p = lstClientes;
+    if (p == NULL)
+    {
+        printf ("Nao existem clientes cadastrados.\n");
+    }
+    else
+    {
+        while (p != NULL)
+        {  
             printf ("Nome: %s || ", p->nome);
             printf ("CNH: %d || ", p->cnh);
-            printf ("Telefone: %d \n", p->telefone);
+            printf ("Telefone: %d\n", p->telefone);
+            p = p->prox;
         }
+        
     }
-    
-    
 }

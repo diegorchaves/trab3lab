@@ -1,3 +1,5 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include "datas.h"
 
 int daysBetweenDates (Date date1, Date date2) 
@@ -27,4 +29,12 @@ int daysBetweenDates (Date date1, Date date2)
 
     int difference = days2 - days1;
     return difference;
+}
+
+Date *pedeData(struct data *dataAtual){
+    Date *dataLocal = (Date*)malloc(sizeof(Date));
+    printf ("Digite a data atual (DD MM AAAA): ");
+    scanf ("%d %d %d", &dataLocal->day, &dataLocal->month, &dataLocal->year);
+
+    return dataLocal;
 }

@@ -6,3 +6,5 @@ typedef struct data
 } Date;
 
 int daysBetweenDates (Date date1, Date date2);
+
+Date *pedeData(struct data *dataAtual);
