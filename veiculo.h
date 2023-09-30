@@ -18,3 +18,7 @@ void imprimeVeiculosDisponiveis (Veiculo *lstVeiculos);
 void leDadosVeiculo (Veiculo *novo);
 
 void imprimeVeiculos (Veiculo *lstVeiculos);
+
+void maisRodados(Veiculo *lstVeiculos);
+
+void verificaTop(Veiculo *lstVeiculos, Veiculo* top[3]);

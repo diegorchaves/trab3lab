@@ -75,3 +75,58 @@ void imprimeVeiculos (Veiculo *lstVeiculos)
         }
     }
 }
+
+void maisRodados(Veiculo *lstVeiculos){
+
+    Veiculo* top[3] ={NULL, NULL, NULL};
+
+    for(int i = 0; i < 3; i++){
+        top[i] = (Veiculo*) malloc(sizeof(Veiculo));
+        top[i]->kilometragem = 0;
+    }
+
+    if (lstVeiculos == NULL)
+    {
+        printf ("Nao existem veiculos cadastrados.\n");
+    }
+    else
+    {
+        verificaTop(lstVeiculos, top);
+        
+        Veiculo* p = NULL;
+        for(int i = 0; i < 3; i++){
+            p = top[i];
+            printf ("Placa: %s ||", p->placa);
+            printf (" Marca: %s ||", p->marca);
+            printf (" Modelo: %s ||", p->modelo);
+            printf (" Ano de fabricacao: %d ||", p->anoFabricacao);
+            printf (" Quilometragem: %.2f ||", p->kilometragem);
+            printf (" Valor diaria: %.2f\n", p->diaria);
+        }
+                
+    }
+}
+
+void verificaTop(Veiculo *lstVeiculos, Veiculo* top[3]){
+
+    Veiculo* p = lstVeiculos;
+
+    while (p != NULL)
+        {
+           if(p->kilometragem > top[0]->kilometragem)
+           {    
+                top[2] = top[1];
+                top[1] = top[0];
+                top[0] = p;
+                
+           }else if(p->kilometragem > top[1]->kilometragem)
+           {    
+                top[2] = top[1];
+                top[1] = p;
+           }else if(p->kilometragem > top[2]->kilometragem)
+           {
+                top[2] = p;
+           }
+            p = p->prox;
+        }
+}
