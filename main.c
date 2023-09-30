@@ -58,7 +58,7 @@ void leOpcaoMenu (int index, Veiculo **lstVeiculos, Cliente **lstClientes, Locac
             imprimeLocacoesAtivas (*lstLocacoes, dataLocal);
             break; 
         case 10: 
-            //Historico(lstClientes);
+            historico(*lstLocacoes);
             break;
         case 11: 
             maisRodados(*lstVeiculos);

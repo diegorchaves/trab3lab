@@ -38,6 +38,7 @@ void realizaDevolucao (char *placaLocal, Locacao **lstLocacoes, Date *dataLocal)
             scanf ("%f", &kmLocal);
             p->veiculo->kilometragem = kmLocal;
             p->devolucao = dataLocal;
+            printf ("Veiculo Devolvido. \n");
             return;
         }
     }
@@ -152,6 +153,38 @@ void imprimeLocacoesAtivas (Locacao *lstLocacoes, Date *dataLocal)
             printf ("Veiculo: %s || ", p->veiculo->placa);
             printf ("Valor pago: %.2f\n", p->valorPago);
             p = p->prox;
+        }
+    }
+}
+
+void historico(Locacao *lstLocacoes){
+    int cnhLocal;
+    int i = 0;
+    Locacao *p = lstLocacoes;
+
+    if (p == NULL)
+    {
+        printf ("Nao existem locacoes cadastradas.\n");
+    }
+    else
+    {   
+        
+        printf ("Digite a CNH do cliente: ");
+        scanf(" %d", &cnhLocal);
+
+        while (p != NULL)
+        {  
+            if(p->cliente->cnh == cnhLocal){
+                printf ("Cliente: %s || ", p->cliente->nome);
+                printf ("Veiculo: %s || ", p->veiculo->placa);
+                printf ("Valor pago: %.2f\n", p->valorPago);
+                i++;
+            }
+            p = p->prox;
+        }
+
+        if(i == 0){
+            printf ("Sem historico de locacao!\n");
         }
     }
 }

@@ -22,4 +22,4 @@ void leDadosDevolucao (Locacao *lstLocacoes);
 
 void calculaFaturamento (Locacao *lstLocacoes);
 
-
+void historico(Locacao *lstLocacoes);
