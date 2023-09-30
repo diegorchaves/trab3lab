@@ -13,7 +13,7 @@ void menu ()
     printf("|2 - Adicionar Clientes   || ");
     printf("8 - Listar Clientes                |\n");
     printf("|3 - Adicionar Locacao    || ");
-    printf("9 - Listar Locacoes                |\n");
+    printf("9 - Listar Locacoes ativas         |\n");
     printf("|4 - Devolver Veiculo     || ");
     printf("10 - Historico Locacoes de Cliente |\n");
     printf("|5 - Faturamento mensal   || ");
@@ -38,7 +38,7 @@ void leOpcao (int index, Veiculo **listaVeiculos, Cliente **listaClientes, Locac
             *listaLocacoes = incluiLocacao (*listaLocacoes, *listaClientes, *listaVeiculos);
             break;
         case 4: 
-            devolveVeiculo (*listaVeiculos, *listaClientes, *listaLocacoes);
+            devolveVeiculo (*listaLocacoes);
             break;
         case 5: 
             // faturamento(listaVeiculos);
@@ -53,7 +53,7 @@ void leOpcao (int index, Veiculo **listaVeiculos, Cliente **listaClientes, Locac
             listarClientes(*listaClientes);
             break;
         case 9: 
-            listarLocacoes(*listaLocacoes);
+            listarLocacoesAtivas(*listaLocacoes);
             break; 
         case 10: 
             //Historico(listaClientes);
@@ -73,16 +73,11 @@ int main ()
     Cliente *listaClientes = NULL;
     Locacao *listaLocacoes = NULL;
 
-   
-    do{
+    do
+    {
         menu();
         scanf(" %d", &index);
         leOpcao(index, &listaVeiculos, &listaClientes, &listaLocacoes);
-        
-   }while(1);
-    
+    } while(1);
 
-    // listaVeiculos = incluiVeiculos (listaVeiculos);
-    // listaClientes = incluiClientes (listaClientes);
-    // listaLocacoes = incluiLocacao (listaLocacoes, listaClientes, listaVeiculos);
 }

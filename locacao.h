@@ -14,9 +14,10 @@ void leDadosLocacao (Locacao *listaLocacao, Locacao *novo, struct cliente *lista
 
 Locacao *incluiLocacao (Locacao *listaLocacao, struct cliente *listaClientes, Veiculo *listaVeiculos);
 
-void listarLocacoes(Locacao *listaLocacao);
+void listarLocacoesAtivas (Locacao *listaLocacao);
 
-void devolveVeiculo (Veiculo *listaVeiculos, struct cliente *listaClientes, Locacao *listaLocacoes);
+void realizaDevolucao (char *placaLocal, Locacao **listaLocacao);
 
-Locacao *liberaLocacao (Locacao *listaLocacoes, Locacao *excluir);
+void devolveVeiculo (Locacao *listaLocacao);
+
 
