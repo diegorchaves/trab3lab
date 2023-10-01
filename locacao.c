@@ -128,13 +128,18 @@ void leDadosLocacao (Locacao *lstLocacoes, Locacao *novo, Cliente *lstClientes, 
 
 Locacao *incluiLocacao (Locacao *lstLocacoes, Cliente *lstClientes, Veiculo *lstVeiculos)
 {
-    Locacao *novo = (Locacao*)malloc(sizeof(Locacao));
-    novo->retirada = (Date*)malloc(sizeof(int)*3);
-    novo->devolucao = (Date*)malloc(sizeof(int)*3);
-    leDadosLocacao (lstLocacoes, novo, lstClientes, lstVeiculos);
-    novo->prox = lstLocacoes;
 
-    return novo;
+    if(lstClientes != NULL && lstVeiculos != NULL){
+        Locacao *novo = (Locacao*)malloc(sizeof(Locacao));
+        novo->retirada = (Date*)malloc(sizeof(int)*3);
+        novo->devolucao = (Date*)malloc(sizeof(int)*3);
+        leDadosLocacao (lstLocacoes, novo, lstClientes, lstVeiculos);
+        novo->prox = lstLocacoes;
+        return novo;
+    }
+    
+    printf("Listas vazias\n");
+    return lstLocacoes;
 }
 
 void imprimeLocacoesAtivas (Locacao *lstLocacoes, Date *dataLocal)
