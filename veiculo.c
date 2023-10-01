@@ -11,14 +11,17 @@ void imprimeVeiculosDisponiveis (Veiculo *lstVeiculos)
     }
     else
     {
-        while (p != NULL && p->disponivel == 1)
+        while (p != NULL)
         {
-            printf ("Placa: %s ||", p->placa);
-            printf (" Marca: %s ||", p->marca);
-            printf (" Modelo: %s ||", p->modelo);
-            printf (" Ano de fabricacao: %d ||", p->anoFabricacao);
-            printf (" Quilometragem: %.2f ||", p->kilometragem);
-            printf (" Valor diaria: %.2f\n", p->diaria);
+            if (p->disponivel)
+            {
+                printf ("Placa: %s ||", p->placa);
+                printf (" Marca: %s ||", p->marca);
+                printf (" Modelo: %s ||", p->modelo);
+                printf (" Ano de fabricacao: %d ||", p->anoFabricacao);
+                printf (" Quilometragem: %.2f ||", p->kilometragem);
+                printf (" Valor diaria: %.2f\n", p->diaria);
+            }
             p = p->prox;
         }
     }
