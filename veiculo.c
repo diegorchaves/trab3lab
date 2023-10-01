@@ -11,6 +11,7 @@ void imprimeVeiculosDisponiveis (Veiculo *lstVeiculos)
     }
     else
     {
+        printf ("Veiculos Disponiveis: \n");
         while (p != NULL && p->disponivel == 1)
         {
             printf ("Placa: %s ||", p->placa);
