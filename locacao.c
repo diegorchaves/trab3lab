@@ -80,7 +80,7 @@ Veiculo *realizaLocacao (char *placaLocal, Veiculo *lstVeiculos)
     return NULL;
 }
 
-void leDadosLocacao (Locacao *lstLocacoes, Locacao *novo, Cliente *lstClientes, Veiculo *lstVeiculos)
+int leDadosLocacao (Locacao *lstLocacoes, Locacao *novo, Cliente *lstClientes, Veiculo *lstVeiculos)
 {
     char nomeLocal[30];
     char placaLocal[8];
@@ -104,26 +104,29 @@ void leDadosLocacao (Locacao *lstLocacoes, Locacao *novo, Cliente *lstClientes, 
     printf ("Digite a data da devolucao (DD MM AAAA): ");
     scanf ("%d %d %d", &novo->devolucao->day, &novo->devolucao->month, &novo->devolucao->year);
 
-    if (lstVeiculos == NULL)
+
+    imprimeVeiculosDisponiveis (lstVeiculos);
+
+    do
     {
-        printf ("Nao existem veiculos cadastrados.\n");
-    }
-    else
-    {
-        imprimeVeiculosDisponiveis (lstVeiculos);
-        do
+        printf ("Digite a placa do veiculo desejado ou sair: ");
+        scanf ("%s", placaLocal);
+        if(!strcmp(placaLocal, "sair")){
+            free(novo->retirada);
+            free(novo->devolucao);
+            free(novo);
+            return 0;
+        }
+        novo->veiculo = realizaLocacao (placaLocal, lstVeiculos);
+        if (novo->veiculo == NULL)
         {
-            printf ("Digite a placa do veiculo desejado: ");
-            scanf ("%s", placaLocal);
-            novo->veiculo = realizaLocacao (placaLocal, lstVeiculos);
-            if (novo->veiculo == NULL)
-            {
-                printf ("Veiculo nao encontrado, verifique a placa.\n");
-            }
-        } while (novo->veiculo == NULL);
-    }
+            printf ("Veiculo nao encontrado, verifique a placa.\n");
+        }
+    } while (novo->veiculo == NULL);
+    
 
     novo->valorPago = novo->veiculo->diaria * daysBetweenDates (*novo->retirada, *novo->devolucao);
+    return 1;
 }
 
 Locacao *incluiLocacao (Locacao *lstLocacoes, Cliente *lstClientes, Veiculo *lstVeiculos)
@@ -133,9 +136,13 @@ Locacao *incluiLocacao (Locacao *lstLocacoes, Cliente *lstClientes, Veiculo *lst
         Locacao *novo = (Locacao*)malloc(sizeof(Locacao));
         novo->retirada = (Date*)malloc(sizeof(int)*3);
         novo->devolucao = (Date*)malloc(sizeof(int)*3);
-        leDadosLocacao (lstLocacoes, novo, lstClientes, lstVeiculos);
-        novo->prox = lstLocacoes;
-        return novo;
+        if(leDadosLocacao (lstLocacoes, novo, lstClientes, lstVeiculos)){
+            novo->prox = lstLocacoes;
+            return novo;
+        }else{
+            printf("Saindo...\n");
+            return lstLocacoes;
+        }
     }
     
     printf("Listas vazias\n");
