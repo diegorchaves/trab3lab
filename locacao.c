@@ -57,13 +57,10 @@ void leDadosDevolucao (Locacao *lstLocacoes)
     imprimeLocacoesAtivas (lstLocacoes, dataLocal);
 
     char placaLocal[8];
-    Locacao *locacaoLocal;
-    do
-    {
-        printf ("Digite a placa do veiculo que deseja devolver: ");
-        scanf ("%s", placaLocal);
-        realizaDevolucao (placaLocal, &lstLocacoes, dataLocal);
-    } while (locacaoLocal == NULL);
+
+    printf ("Digite a placa do veiculo que deseja devolver: ");
+    scanf ("%s", placaLocal);
+    realizaDevolucao (placaLocal, &lstLocacoes, dataLocal);
 }
 
 Veiculo *realizaLocacao (char *placaLocal, Veiculo *lstVeiculos)
