@@ -156,11 +156,13 @@ void imprimeLocacoesAtivas (Locacao *lstLocacoes, Date *dataLocal)
     }
     else
     { 
-        while (p != NULL && (daysBetweenDates (*dataLocal, *p->devolucao) > 0) && p->veiculo->disponivel == 0)
+        while (p != NULL)
         {
-            printf ("Cliente: %s || ", p->cliente->nome);
+          if((daysBetweenDates (*dataLocal, *p->devolucao) > 0) && p->veiculo->disponivel == 0){
+printf ("Cliente: %s || ", p->cliente->nome);
             printf ("Veiculo: %s || ", p->veiculo->placa);
             printf ("Valor pago: %.2f\n", p->valorPago);
+}
             p = p->prox;
         }
     }
