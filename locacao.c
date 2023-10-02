@@ -120,7 +120,7 @@ int leDadosLocacao (Locacao *lstLocacoes, Locacao *novo, Cliente *lstClientes, V
             printf ("Veiculo nao encontrado, verifique a placa.\n");
         }
     } while (novo->veiculo == NULL);
-    
+
 
     novo->valorPago = novo->veiculo->diaria * daysBetweenDates (*novo->retirada, *novo->devolucao);
     return 1;
@@ -141,21 +141,28 @@ Locacao *incluiLocacao (Locacao *lstLocacoes, Cliente *lstClientes, Veiculo *lst
             return lstLocacoes;
         }
     }
-    
-    printf("Listas vazias\n");
+
+    if (lstClientes == NULL)
+    {
+        printf ("Sem clientes cadastrados.\n");
+    }
+    else if (lstVeiculos == NULL)
+    {
+        printf ("Sem veiculos disponiveis.\n");
+    }
     return lstLocacoes;
 }
 
 void imprimeLocacoesAtivas (Locacao *lstLocacoes, Date *dataLocal)
 {
     Locacao *p = lstLocacoes;
-    
+
     if (p == NULL)
     {
         printf ("Nao existem locacoes ativas.\n");
     }
     else
-    { 
+    {
         while (p != NULL)
         {
           if((daysBetweenDates (*dataLocal, *p->devolucao) > 0) && p->veiculo->disponivel == 0){
@@ -178,13 +185,13 @@ void historico(Locacao *lstLocacoes){
         printf ("Nao existem locacoes cadastradas.\n");
     }
     else
-    {   
-        
+    {
+
         printf ("Digite a CNH do cliente: ");
         scanf(" %d", &cnhLocal);
 
         while (p != NULL)
-        {  
+        {
             if(p->cliente->cnh == cnhLocal){
                 printf ("Cliente: %s || ", p->cliente->nome);
                 printf ("Veiculo: %s || ", p->veiculo->placa);
